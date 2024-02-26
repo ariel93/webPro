@@ -9,3 +9,4 @@ registerBtn.addEventListener('click',()=>{
 loginBth.addEventListener('click',()=>{
     container.classList.remove("active")
 })
+
