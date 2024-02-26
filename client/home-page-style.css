@@ -83,7 +83,7 @@ section {
 }
 
 .buy-button {
-    background-color: #4caf50;
+    background-color: #522da8ba;
     color: #fff;
     padding: 10px;
     border: none;
@@ -92,7 +92,7 @@ section {
     transition: background-color 0.3s ease;    /* изменения в свойстве background-color кнопки должны происходить с плавным эффектом (ease) за 0.3 секунды. */
 }
 .buy-button:hover {/* действие при наведении  */
-    background-color: #45a049;
+    background-color: #522da8;
 }
 
 footer {
