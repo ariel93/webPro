@@ -37,6 +37,7 @@ async function signIn(event) {
   try {
     const response = await axios.post("http://localhost:4000/users/sign-in",
      { email, password });
+     
     if (response.data !== undefined) {
       console.log("Sign in successful");
       // Perform actions after successful sign-in, such as redirecting to a new page or updating UI.
