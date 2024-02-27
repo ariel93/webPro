@@ -34,7 +34,7 @@
             </form>
         </div>
         <div class="form-container sign-in">
-            <form >
+            <form id="loginForm" onsubmit="signIn(event)">
                 <h1>Sign In</h1>
                 <div class="social-icons">
                 <a href="#" class="icon">
@@ -49,10 +49,10 @@
                 <div>
                     <span>or use your email
                         password</span>
-                        <input type="email" placeholder="Email">
-                        <input type="password" placeholder="password">
-                        <a href="#">Forget your Password?</a>
-                        <button>Sign In</button>
+                        <input type="email" placeholder="Email" name="userEmail">
+                        <input type="password" placeholder="password" name="userPassword">
+                        <a href="#">Forget your Password?</a> 
+                        <button type="submit">Sign In</button>
                 </div>
             </form>
         </div>

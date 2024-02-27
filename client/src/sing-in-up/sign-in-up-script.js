@@ -29,6 +29,23 @@ async function singUp(event) {
       }
     
 }
+
+async function signIn(event) {
+  event.preventDefault();
+  let email = event.target.userEmail.value;
+  let password = event.target.userPassword.value;
+  try {
+    const response = await axios.post("http://localhost:4000/users/sign-in",
+     { email, password });
+    if (response.data !== undefined) {
+      console.log("Sign in successful");
+      // Perform actions after successful sign-in, such as redirecting to a new page or updating UI.
+    }
+  } catch (error) {
+    console.error("Error signing in: " + error);
+    // Handle sign-in error, such as displaying an error message to the user.
+  }
+}
   
 
 

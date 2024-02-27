@@ -10,6 +10,7 @@ router.get('/', userController.getAllUsers);
 
 // create a new post route for sign in request, with endpint "sign_in"
 // serController.signIn will use getByValue(email  === mongo.email), and then compare the passwords.
+router.post('/sign-in', userController.signIn);
 
 // Get a user by ID
 router.get('/:id', userController.getUserById);
