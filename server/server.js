@@ -16,6 +16,8 @@ mongoose.connect(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONG
     console.log("DB conection trouble:" + err);
 })
 
+
+
 app.use(cors())
 app.use(express.json()); 
 app.use(express.static("client"));
