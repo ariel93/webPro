@@ -22,20 +22,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function addToCart(product) {
         cart.push(product);
-        console.log(`Товар "${product.title}" add to cart.`);
+        console.log(`Product "${product.title}" added to the cart.`);
     }
 
     function openProductModal(product) {
-        // Заполнить детали продукта в модальном окне
+        // Fill in the product details in the modal
         productDetailsContainer.innerHTML = `       
             <h2>${product.title}</h2>
             <p>${product.description}</p>
-            <p>Цена: $${product.price}</p>
-            <button class="buy-button">add to cart</button>
+            <p>Price: $${product.price}</p>
+            <button class="buy-button" onclick="addToCartInModal('${product.title}')">Add to Cart</button>
         `;
-        
 
-        // Показать модальное окно
+        // Show the modal
         productModal.style.display = 'block';
         document.body.classList.add('modal-open');
     }
@@ -64,15 +63,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const priceElement = document.createElement('p');
             priceElement.classList.add('product-price');
-            priceElement.textContent = `price: $${product.price}`;
+            priceElement.textContent = `Price: $${product.price}`;
 
             const addToCartButton = document.createElement('button');
             addToCartButton.classList.add('buy-button');
-            addToCartButton.textContent = 'add to cart';
+            addToCartButton.textContent = 'Add to Cart';
 
             const viewDetailsButton = document.createElement('button');
             viewDetailsButton.classList.add('buy-button');
-            viewDetailsButton.textContent = 'More...';
+            viewDetailsButton.textContent = 'Details...';
 
             addToCartButton.addEventListener('click', () => {
                 addToCart(product);
@@ -96,6 +95,64 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    function addToCartInModal(productTitle) {
+        const product = cart.find(item => item.title === productTitle);
+        if (product) {
+            addToCart(product);
+        }
+    }
+
+    function openCartModal() {
+        const cartModal = document.createElement('div');
+        cartModal.classList.add('modal-content');
+    
+        const cartList = document.createElement('ul');
+        let totalPrice = 0;
+    
+        cart.forEach((product, index) => {
+            const cartItem = document.createElement('li');
+            cartItem.textContent = `${product.title} - $${product.price}`;
+    
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.addEventListener('click', () => {
+                // Remove the product from the cart
+                cart.splice(index, 1);
+                // Update the cart modal
+                openCartModal();
+            });
+    
+            cartItem.appendChild(deleteButton);
+            cartList.appendChild(cartItem);
+    
+            // Sum up the prices of products
+            totalPrice += product.price;
+        });
+    
+        const totalQuantity = cart.length;
+    
+        const summaryInfo = document.createElement('p');
+        summaryInfo.textContent = `Total Products: ${totalQuantity}, Total Price: $${totalPrice.toFixed(2)}`;
+    
+        const confirmButton = document.createElement('button');
+        confirmButton.textContent = 'Confirm';
+        confirmButton.addEventListener('click', () => {
+            console.log('Purchase confirmation:', cart);
+            // Your code for handling purchase confirmation
+        });
+    
+        cartModal.appendChild(cartList);
+        cartModal.appendChild(summaryInfo);
+        cartModal.appendChild(confirmButton);
+    
+        // Show the cart modal
+        productDetailsContainer.innerHTML = '';
+        productDetailsContainer.appendChild(cartModal);
+        productModal.style.display = 'block';
+        document.body.classList.add('modal-open');
+    }
+       
+
     fetch('https://fakestoreapi.com/products')
         .then(res => res.json())
         .then(json => {
@@ -107,17 +164,18 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             cartButton.addEventListener('click', function () {
-                console.log('go to cart:', cart);
-                // Ваш код для перехода в корзину
+                openCartModal();
             });
 
             modalCloseButton.addEventListener('click', function () {
-                // Закрыть модальное окно
+                // Close the modal
                 productModal.style.display = 'none';
                 document.body.classList.remove('modal-open');
             });
 
             renderProducts(sortedProducts);
         })
-        .catch(error => console.error('data error:', error));
+        .catch(error => console.error('Data error:', error));
 });
+
+
