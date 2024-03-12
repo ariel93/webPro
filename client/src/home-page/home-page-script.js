@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const modalCloseButton = document.querySelector('.close');
     const cart = [];
 
+   
+
+
     function sortProducts(products, sortBy) {
         switch (sortBy) {
             case 'name':
@@ -136,9 +139,26 @@ document.addEventListener('DOMContentLoaded', function () {
     
         const confirmButton = document.createElement('button');
         confirmButton.textContent = 'Confirm';
-        confirmButton.addEventListener('click', () => {
-            console.log('Purchase confirmation:', cart);
-            // Your code for handling purchase confirmation
+       
+
+        
+        confirmButton.addEventListener('click', async() => {   
+        const total = cart.reduce((accumulator, currentValue) => accumulator + currentValue.price,0);   
+        console.log('Purchase confirmation:', cart);
+        console.log(total);
+        try {
+                const response = await axios.post("http://localhost:4000/orders",
+                   { items:cart,total});
+                   
+                if (response.data !== undefined) {
+                  console.log("ordere successful");
+                  alert("thank you for the order");
+                  window.location.href='http://127.0.0.1:5500/client/src/sign-in-up/sign-in-up.html';
+                }
+              } catch (error) {
+                console.error("Error fetching, " + error);
+              } 
+              
         });
     
         cartModal.appendChild(cartList);

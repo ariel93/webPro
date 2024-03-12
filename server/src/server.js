@@ -4,7 +4,8 @@ const express = require("express");
 const cors = require('cors');
 
 const LoggeeMiddleware = require('./middlewares/logger');
-const userRoutes = require('./src/user/userRoutes');
+const userRoutes = require('./user/userRoutes');
+const orderRoutes = require('./order/orderRoutes');
 
 const app = express();
 
@@ -25,7 +26,9 @@ app.use(LoggeeMiddleware);
 
 // Use user routes
 app.use('/users', userRoutes);
+app.use('/orders', orderRoutes);
 
 app.listen(process.env.APP_PORT, () => {
     console.log(`server is on: http://localhost:${process.env.APP_PORT}`);
 });
+

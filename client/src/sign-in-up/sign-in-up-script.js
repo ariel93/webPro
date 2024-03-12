@@ -26,8 +26,8 @@ async function singUp(event) {
         }
       } catch (error) {
         console.error("Error fetching, " + error);
-      }
-    
+      } 
+      
 }
 
 async function signIn(event) {
