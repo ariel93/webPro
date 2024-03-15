@@ -40,8 +40,12 @@ async function signIn(event) {
      
     if (response.data !== undefined) {
       console.log("Sign in successful");
-      window.location.href='http://127.0.0.1:5500/client/src/home-page/home-page.html';
-      // Perform actions after successful sign-in, such as redirecting to a new page or updating UI.
+      if( email == "ariel@gmail.com" && password =='ariel123'){
+        window.location.href='http://127.0.0.1:5500/client/src/orders-page/orders-page.html';
+      } else{
+        window.location.href='http://127.0.0.1:5500/client/src/home-page/home-page.html';
+        // Perform actions after successful sign-in, such as redirecting to a new page or updating UI.
+      }
     }
   } catch (error) {
     console.error("Error signing in: " + error);

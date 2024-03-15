@@ -7,7 +7,8 @@ const orderController = require('./orderController');
 router.post('/', orderController.createOrder);
 
 // Get all users
-router.get('/all',adminAuthMiddleware, orderController.getAllOrders);
+// router.get('/all',adminAuthMiddleware, orderController.getAllOrders);
+router.get('/all', orderController.getAllOrders);
 
 // Get a user by ID
 router.get('/:id', orderController.getOrderById);
